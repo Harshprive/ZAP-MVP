@@ -1,0 +1,770 @@
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
+.services-section{
+ 
+ 
+  height: 100%;
+  margin-top: 30px;
+
+  
+  
+  
+}
+
+/* General Styles */
+.Home-page-services-card-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Hide both X and Y scrollbars */
+  width: 100%;
+}
+
+.Home-page-services-cards {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  flex-wrap: nowrap;
+  width: 100%; /* Make sure it's always as wide as the container */
+  height: 280px;
+  padding: 20px;
+  
+}
+
+.Home-page-services-card {
+  width: 185px;
+  height:177px;
+  margin: 0 10px;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.Home-page-services-card:hover {
+  
+  width: 247px;
+  height:237px;
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+
+.Home-page-services-card:hover .Home-page-services-card-title{
+  font-size:40px ;
+  width: 159px;
+  margin-top: 20px;
+  
+  
+}
+
+.Home-page-services-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Home-page-services-card-title {
+  position: absolute;
+  margin-top: 100px;
+  width: 66px;
+  height: 21px;
+  font-size: 18px;
+  
+  
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.Home-page-services-card-hover-content {
+  display: none;
+  position: absolute;
+  display: flex;
+  
+  width: 100%;
+  
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  height: 100px;
+  justify-content: center;
+  
+  
+}
+
+.Home-page-services-card:hover .Home-page-services-card-hover-content{
+  display: block;
+  display: flex;
+  opacity: 1;
+}
+
+.Home-page-get-service-btn {
+  
+  
+  width: 105px;
+  height: 23px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 150px;
+  margin-left: 80px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transform: scale(1.1);
+}
+
+
+
+.right-arrow {
+  margin-top: 5px;
+  margin-left: 29px;
+  font-weight: 800;
+  
+  color: aliceblue;
+  cursor: pointer;
+}
+
+.mobile-nav .arrow {
+  cursor: pointer;
+  font-size: 24px;
+  color: #333;
+}
+
+.mobile-nav .arrow.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .card-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .cards {
+    display: flex;
+    transition: transform 0.3s ease;
+    flex-wrap: nowrap;
+    overflow-x: hidden; /* Disable horizontal scrolling */
+  }
+
+  .card {
+    width: 150px;
+    height: 150px;
+    margin: 0 5px;
+  }
+
+  /* Initially hide the arrows on mobile */
+  .mobile-nav {
+    display: none;
+  }
+
+  /* When mobile container is clicked, show the navigation arrows */
+  .card-container.show-arrows .mobile-nav {
+    display: block;
+  }
+}
+/*NEW AND NOTEWORTHY CARD CSS HANDLING*/
+
+/*body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}*/
+
+/* Main container styling */
+.NEW-AND-NOTEWORTHY-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+  
+  
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+.NEW-AND-NOTEWORTHY-card-container{
+  
+  display: flex;
+  justify-content: center;
+}
+
+/* Heading styling */
+.NEW-AND-NOTEWORTHY-container h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  
+}
+.noteworthy-header h1{
+  text-align: left;
+}
+
+/* Row styling for cards */
+.row {
+  display: flex;
+  
+  gap: 25px;
+  
+  /* Allows responsiveness */
+}
+
+/* Card styling */
+.NEW-AND-NOTEWORTHY-card {
+  position: relative;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 566px;
+  height: 388px;
+  text-align: left;
+}
+
+/* Image styling */
+.NEW-AND-NOTEWORTHY-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay styling */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(136, 12, 202, 0.522); /* Purple overlay */
+  z-index: 1;
+}
+
+/* Text and button container styling */
+.NEW-AND-NOTEWORTHY-text-info-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 20px;
+  z-index: 2;
+  
+  margin-left: 20px;
+}
+
+/* Heading inside card */
+.NEW-AND-NOTEWORTHY-text-info-button h3 {
+  font-size: 1.8rem;
+  width: 100px;
+  color: white;
+  margin-bottom: 90px;
+}
+
+/* Button styling */
+.explore-btn {
+  margin-top: 100px;
+  background-color: #fff;
+  color: #8505c5;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 900;
+  transition: background-color 0.3s ease;
+}
+
+.explore-btn:hover {
+  background-color: #eee;
+}
+
+
+
+/*responsive*/
+@media (max-width: 600px) {
+  .NEW-AND-NOTEWORTHY-container {
+    
+    
+   
+    
+  }
+
+  .NEW-AND-NOTEWORTHY-card-container{
+    
+    
+  }
+  
+  /* Heading styling */
+  .NEW-AND-NOTEWORTHY-container h1 {
+    font-size: 1.5rem;
+    
+  }
+  .noteworthy-header h1{
+   
+  }
+  
+  /* Row styling for cards */
+  .row {
+    gap: 10px;
+   
+    
+    /* Allows responsiveness */
+  }
+  
+  /* Card styling */
+  .NEW-AND-NOTEWORTHY-card {
+    height: 200px;
+    width: 300px;
+
+    
+  }
+  
+  /* Image styling */
+  .NEW-AND-NOTEWORTHY-card-img {
+   
+  }
+  
+  /* Overlay styling */
+  .overlay {
+   
+  }
+  
+  /* Text and button container styling */
+  .NEW-AND-NOTEWORTHY-text-info-button {
+   position: absolute;
+  
+
+  height: 100%;
+ 
+  
+  
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content:start
+
+ 
+     
+  }
+  
+  /* Heading inside card */
+  .NEW-AND-NOTEWORTHY-text-info-button h3 {
+    
+   font-size: 20px;
+   
+   
+  width: 100px;
+  color: white;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  align-items: end;
+   
+  }
+  
+  /* Button styling */
+  .explore-btn {
+   margin-top: 80px;
+  background-color: #fff;
+  color: #8505c5;
+  border: none;
+  padding: 6px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 900;
+  transition: background-color 0.3s ease;
+   
+  }
+  
+  .explore-btn:hover {
+   
+  }
+  
+}
+
+
+
+/*shop card css handling************************************************/
+/* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}*/
+
+/*body {
+  background-color: #f5f7fa;
+  padding: 2rem;
+}*/
+
+.BEST-SHOPS-CARDS-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.best-shop-header {
+  text-align: left;
+  margin-left: 15px;
+  
+}
+
+.best-shop-header h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  
+}
+
+.header p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+
+
+
+
+.search-bar input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.1);
+}
+
+.shops-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.shop-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shop-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.shop-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.shop-data{
+  height: 150px;
+}
+
+.shop-info {
+  padding: 1.5rem;
+  
+}
+
+.shop-category {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background: #ede4ff;
+  color: #c8a4b5;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.shop-name {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.shop-description {
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.shop-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  margin-top: 20px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  color: #f39c12;
+}
+
+.stars {
+  margin-right: 0.5rem;
+  color: #2aff00;
+}
+
+.review-count {
+  color: #95a5a6;
+  font-size: 0.9rem;
+}
+
+.shop-status {
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.status-open {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-closed {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.featured-tag {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #2aff00;
+  color: white;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.shop-details {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.shop-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header h1{
+  text-align: left;
+}
+
+/***responsive***/
+@media(max-width:600px){
+  .BEST-SHOPS-CARDS-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .best-shop-header {
+    text-align: left;
+    margin-left: 15px;
+    
+  }
+  
+  .best-shop-header h1 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    
+  }
+  
+  .header p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+  }
+  
+  
+  
+  
+  
+  .search-bar input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.1);
+  }
+  
+  .shops-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+  }
+  
+  .shop-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .shop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .shop-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .shop-data{
+    height: 150px;
+  }
+  
+  .shop-info {
+    padding: 1.5rem;
+    
+  }
+  
+  .shop-category {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    background: #ede4ff;
+    color: #c8a4b5;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .shop-name {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+  
+  .shop-description {
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .shop-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    margin-top: 20px;
+    border-top: 1px solid #ecf0f1;
+  }
+  
+  .rating {
+    display: flex;
+    align-items: center;
+    color: #f39c12;
+  }
+  
+  .stars {
+    margin-right: 0.5rem;
+    color: #2aff00;
+  }
+  
+  .review-count {
+    color: #95a5a6;
+    font-size: 0.9rem;
+  }
+  
+  .shop-status {
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .status-open {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .status-closed {
+    background: #ffebee;
+    color: #c62828;
+  }
+  
+  .featured-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #2aff00;
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .shop-details {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+  
+  .shop-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .header h1{
+    text-align: left;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/*recomendation*/
+
+
+.Recommendation-section{
+  
+}
+
+.Recommendation-section h1{
+  
+  font-size: 30px;
+  font-weight: 500;
+  height: 40px;
+  padding-left: 40px;
+  display: flex;
+  align-items: baseline;
+}

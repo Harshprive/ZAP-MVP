@@ -1,0 +1,101 @@
+h4 {
+    margin-left: 35%;
+  }
+  
+  .container {
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .btnnn {
+    height: 30px;
+    border-radius: 5px;
+    color: purple;
+    margin-left: 450px;
+  }
+  
+  h1 {
+    color: purple;
+    margin-left: 730px;
+  }
+  
+  .booking-details {
+    margin-bottom: 20px;
+  }
+  
+  .booking-details h2 {
+    text-align: center;
+    color: black;
+    margin-bottom: 10px;
+  }
+  
+  .detail {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+  }
+  
+  .verify-booking {
+    text-align: center;
+  }
+  
+  .code-input {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .code-input input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .confirm-button {
+    background-color: #5e1b8b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 40px;
+    width: 350px;
+  }
+  
+  .code-expiry {
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .spa {
+    margin-left: 530px;
+    color: rgb(47, 0, 68);
+  }
+  
+  h2 {
+    font-size: large;
+    margin-right: 260px;
+  }
+  

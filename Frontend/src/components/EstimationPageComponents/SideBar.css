@@ -1,0 +1,101 @@
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden off-screen to the left */
+    width: 250px;
+    height: 100%;
+    background-color: #ebe4fb;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.003s ease;
+    z-index: 1000;
+  }
+  
+  .sidebar.open {
+    left: 20%; /* Move to this position when the sidebar opens */
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+  }
+  
+  .sidebar-menu {
+    margin-top: 40px;
+    list-style: none;
+    padding: 2px 0px;
+  }
+  
+  .menu-icon {
+    margin-right: 5px;
+    color: #605e63;
+    font-size: 1rem;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 4px;
+    font-size: 1rem;
+    color: #333;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .menu-item:hover {
+    background-color: #dcdcdc; /* Darker background on hover */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    /* For smaller screens */
+    .sidebar {
+      width: 200px; /* Adjust width */
+    }
+  
+    .sidebar.open {
+      left: 10%; /* Open from left edge for small screens */
+    }
+  
+    /* Adjust menu items */
+    .menu-item {
+      font-size: 0.9rem; /* Smaller font on smaller screens */
+    }
+  
+    .menu-icon {
+      font-size: 1.2rem; /* Adjust icon size */
+    }
+  
+    .close-button {
+      font-size: 1.5rem; /* Larger close button */
+    }
+  }
+  
+  /* For even smaller screens (like mobile phones) */
+  @media (max-width: 480px) {
+    .sidebar {
+      width: 180px; /* Further reduce width for very small screens */
+    }
+    .sidebar.open {
+        left: 0%; /* Move to this position when the sidebar opens */
+      }
+    .menu-item {
+      font-size: 0.8rem; /* Further reduce font size */
+    }
+  
+    .menu-icon {
+      font-size: 1.1rem; /* Adjust icon size */
+    }
+  
+    .close-button {
+      font-size: 1.8rem; /* Larger close button */
+    }
+  }
+  

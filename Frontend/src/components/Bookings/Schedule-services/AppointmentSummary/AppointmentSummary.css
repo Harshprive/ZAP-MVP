@@ -1,0 +1,48 @@
+.appointment-summary {
+    background-color: #f3f4f6;
+    padding: 20px;
+    border-radius: 10px;
+    height: 230px;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+    
+    max-width: 400px;
+    
+    font-family: Arial, sans-serif;
+    margin-top: 5px;
+  }
+  
+  .appointment-details p {
+    display: flex;
+    justify-content: space-between; /* Ensures text spans across available space */
+    margin: 5px 0;
+  }
+  .appointment-details p span {
+    text-align: right;
+    
+    
+  }
+  
+  .appointment-schedule-button {
+    background-color:#7e57c2 ;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 1px;
+    width: 100%;
+  }
+  
+  .schedule-button:hover {
+    background-color: #6200ea;
+  }
+  /* AppointmentSummary.css */
+/* AppointmentSummary.css */
+
+   
+    
+  
+  
+  
+  

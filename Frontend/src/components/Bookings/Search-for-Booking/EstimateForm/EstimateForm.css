@@ -1,0 +1,41 @@
+/* components/EstimateForm.css */
+.estimate-form {
+    
+    background-color: #ede4ff;
+    
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .estimate-form-content{
+    height: 200px;
+    width: 100%;
+    margin: 0%;
+    display: flex;
+    align-items: first baseline;
+    padding-left: 40px;
+    flex-direction: column;
+  }
+  .estimate-form-content h1{
+    margin: 0px;
+    height: 60px;
+    width: 30%;
+    display: flex;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: start;
+    color: #5429ba;
+    
+  }
+  .text-info{
+    margin-top: 40px;
+    
+  }
+  .text-info p{
+    display: flex;
+    text-align: start;
+    color: #95929b;
+  }
+  

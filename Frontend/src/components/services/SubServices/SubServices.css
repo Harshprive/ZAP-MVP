@@ -1,0 +1,260 @@
+.Home-India{
+
+}
+.service-main-page{
+   background-color: aliceblue;
+    
+}
+.service-page1{
+  justify-self: center;
+  width: 80%;
+  padding-top: 30px;
+}
+.Home-India{
+  color: #5941A9;
+}
+.Home-India span{
+  color:red;
+}
+.NearYou {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+    
+    height: 25vh;
+  }
+  .NearYou-Heading{
+    width:100%;
+    height: 40px;
+    margin-bottom: 15px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color:#4f23b8;
+    font-size: 15px;
+
+  }
+  
+  .NearYou-Heading h1 {
+    font-size: 32px;
+    
+    margin-bottom: 10px;
+  }
+
+  
+  .see-all {
+    color: black;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 800px;
+    align-self: flex-end;
+    
+    transition: color 0.2s;
+    width: 50px;
+  }
+  
+  .see-all:hover {
+    color: #4B3690;
+  }
+
+  .NearYou-card{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0%;
+    
+  }
+  
+  /*cleaninng in our services*/
+  .cleaning-service-container {
+    margin-top: 50px;
+    
+    
+  }
+  
+  .cleaning-header {
+    
+    margin-bottom: 20px;
+    
+  }
+  
+  .cleaning-header h1 {
+    align-self: self-start;
+    color: #4f23b8;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cleaning-header p {
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  .services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+    gap: 2rem;
+  }
+
+  /***** Service request *********/
+  .Request-service-container {
+    max-width: 1200px;
+    margin: 0 auto; 
+    
+  }
+  
+  .Request-service-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .Request-service-header h1 {
+    color: #4f23b8;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .Request-service-header p {
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  .requests {
+    width: 100%;
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+    
+  }
+  
+  .request-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .request-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-header {
+    background: #1a237e;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .service-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .service-category {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .profile-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 3px solid #1a237e;
+  }
+  
+  .profile-info {
+    flex-grow: 1;
+  }
+  
+  .profile-name {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+  }
+  
+  .profile-rating {
+    color: #ffc107;
+    margin-bottom: 0.3rem;
+  }
+  
+  .profile-status {
+    font-size: 0.9rem;
+    color: #4CAF50;
+  }
+  
+  .service-description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .service-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+  }
+  
+  .detail-item {
+    text-align: center;
+  }
+  
+  .detail-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+  }
+  
+  .detail-value {
+    font-size: 1.1rem;
+    color: #1a237e;
+    font-weight: bold;
+  }
+  
+  .request-button {
+    width: 100%;
+    padding: 1rem;
+    background: #1a237e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .request-button:hover {
+    background: #283593;
+  }
+
+  @media(max-width: 768px){
+    .cleaning-header h1 {
+      align-self: self-start;
+      color: red;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+  }
