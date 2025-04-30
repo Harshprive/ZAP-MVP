@@ -1,7 +1,9 @@
 ### Backend Dockerfile (Backend/App/Dockerfile)
-FROM node:18-alpine
+
+FROM python:3.10-slim
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
-CMD ["npm", "start"]
+CMD ["python", "app.py"]
+
