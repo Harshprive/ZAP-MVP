@@ -49,6 +49,7 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+           npx expo install react-dom react-native-web @expo/metro-runtime
 
     - name: Run tests
       run: npm test --if-present
