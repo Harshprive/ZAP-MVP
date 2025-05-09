@@ -48,8 +48,7 @@ jobs:
         node-version: '18'
 
     - name: Install frontend dependencies
-      run: npm install --legacy-peer-deps  # Add this flag to bypass peer dependency issues
-
+      run: npm install --legacy-peer-deps  
     - name: Install Expo dependencies
       run: npx expo install react-dom react-native-web @expo/metro-runtime @expo/webpack-config
            
