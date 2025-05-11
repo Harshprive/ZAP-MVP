@@ -1,149 +1,158 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
-    View,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    StyleSheet,
-    ActivityIndicator
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
+import CustomButton from '../../components/CustomButton';
 
-const OTPVerificationScreen = ({ navigation }) => {
-    const [phoneNumber, setPhoneNumber] = useState('7701890416');
-    const [otp, setOtp] = useState('');
-    const [isWaiting, setIsWaiting] = useState(true);
+const OTPVerificationScreen = ({ navigation, route }) => {
+  const { phoneNumber } = route.params;
+  const [otp, setOtp] = useState('');
+  const [isWaiting, setIsWaiting] = useState(true);
+  const isFormValid = otp.length === 6;
 
-    useEffect(() => {
-        // Simulate waiting for OTP
-        const timer = setTimeout(() => {
-            setIsWaiting(false);
-        }, 10000);
+  
+  const handleVerify = useCallback(() => {
+    if (isFormValid) {
+      navigation.navigate('DocumentsVerificationScreen');
+    }
+  }, [isFormValid, navigation]);
 
-        return () => clearTimeout(timer);
-    }, []);
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.content}>
-                <Text style={styles.headerText}>ZAP-Provider's</Text>
+  const handleResend = useCallback(() => {
+    
+    setIsWaiting(true);
+    setOtp('');
+    setTimeout(() => setIsWaiting(false), 10000);
+  }, []);
 
-                <View style={styles.phoneContainer}>
-                    <Text style={styles.phoneNumber}>{phoneNumber}</Text>
-                    <TouchableOpacity>
-                        <Text style={styles.changeButton}>Change</Text>
-                    </TouchableOpacity>
-                </View>
 
-                <Text style={styles.otpInfoText}>
-                    One Time Password (OTP) is sent to this number
-                </Text>
+  useEffect(() => {
+    const timer = setTimeout(() => setIsWaiting(false), 10000);
+    return () => clearTimeout(timer);
+  }, []);
 
-                {isWaiting ? (
-                    <View style={styles.waitingContainer}>
-                        <ActivityIndicator size="small" color="#0066CC" />
-                        <Text style={styles.waitingText}>Waiting to auto read OTP</Text>
-                    </View>
-                ) : null}
+  return (
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.headerText}>ZAP-Provider's</Text>
 
-                <View style={styles.inputContainer}>
-                    <Text style={styles.inputLabel}>Enter OTP</Text>
-                    <TextInput
-                        style={styles.otpInput}
-                        value={otp}
-                        onChangeText={setOtp}
-                        keyboardType="number-pad"
-                        maxLength={6}
-                    />
-                </View>
-
-                <TouchableOpacity style={styles.verifyButton} onPress={() => navigation.navigate("DocumentsVerificationScreen")}>
-                    <Text style={styles.verifyButtonText}>VERIFY</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.resendButton}>
-                    <Text style={styles.resendButtonText}>RESEND OTP</Text>
-                </TouchableOpacity>
-            </View>
+        <View style={styles.phoneContainer}>
+          <Text style={styles.phoneNumber}>{phoneNumber}</Text>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={styles.changeButton}>Change</Text>
+          </TouchableOpacity>
         </View>
-    );
+
+        <Text style={styles.otpInfoText}>
+          One Time Password (OTP) sent to this number
+        </Text>
+
+        {isWaiting && (
+          <View style={styles.waitingContainer}>
+            <ActivityIndicator size="small" color="#0066CC" />
+            <Text style={styles.waitingText}>Waiting to auto-read OTP</Text>
+          </View>
+        )}
+
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Enter OTP</Text>
+          <TextInput
+            style={styles.otpInput}
+            value={otp}
+            onChangeText={setOtp}
+            keyboardType="number-pad"
+            maxLength={6}
+            autoFocus
+        
+            placeholderTextColor="#ccc"
+          />
+        </View>
+
+        <CustomButton title="VERIFY" isActive={isFormValid} onPress={handleVerify} />
+
+        <TouchableOpacity style={styles.resendButton} onPress={handleResend}>
+          <Text style={styles.resendButtonText}>RESEND OTP</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-    },
-    content: {
-        flex: 1,
-        paddingHorizontal: 20,
-        paddingTop: 40,
-    },
-    headerText: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#0066CC',
-        marginBottom: 40,
-    },
-    phoneContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
-    phoneNumber: {
-        fontSize: 16,
-        color: '#333',
-    },
-    changeButton: {
-        marginLeft: 15,
-        color: '#0066CC',
-        fontSize: 16,
-    },
-    otpInfoText: {
-        color: '#666',
-        marginBottom: 20,
-    },
-    waitingContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginVertical: 20,
-    },
-    waitingText: {
-        marginLeft: 10,
-        color: '#666',
-    },
-    inputContainer: {
-        marginBottom: 30,
-    },
-    inputLabel: {
-        color: '#666',
-        marginBottom: 8,
-    },
-    otpInput: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
-        fontSize: 18,
-        paddingVertical: 5,
-        color: '#333',
-    },
-    verifyButton: {
-        backgroundColor: '#0066CC',
-        paddingVertical: 15,
-        borderRadius: 30,
-        alignItems: 'center',
-        marginBottom: 20,
-    },
-    verifyButtonText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    resendButton: {
-        alignItems: 'center',
-    },
-    resendButtonText: {
-        color: '#0066CC',
-        fontSize: 16,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    justifyContent: 'center',
+  },
+  content: {
+    padding: 20,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#0066CC',
+    marginBottom: 40,
+    textAlign: 'center',
+  },
+  phoneContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  phoneNumber: {
+    fontSize: 16,
+    color: '#333',
+    flex: 1,
+  },
+  changeButton: {
+    color: '#0066CC',
+    fontSize: 16,
+  },
+  otpInfoText: {
+    color: '#666',
+    marginBottom: 20,
+    fontSize: 14,
+  },
+  waitingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  waitingText: {
+    marginLeft: 10,
+    color: '#666',
+    fontSize: 14,
+  },
+  inputContainer: {
+    marginBottom: 30,
+  },
+  inputLabel: {
+    color: '#666',
+    marginBottom: 8,
+    fontSize: 14,
+  },
+  otpInput: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    fontSize: 18,
+    paddingVertical: 8,
+    color: '#333',
+    letterSpacing: 8,
+  },
+  resendButton: {
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  resendButtonText: {
+    color: '#0066CC',
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });
 
 export default OTPVerificationScreen;

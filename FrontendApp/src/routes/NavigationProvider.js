@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import SplashScreen from '../screens/RegisterScreen/SplashScreen';
 import Login from '../screens/RegisterScreen/Login';
+import OTPVerification from '../screens/RegisterScreen/OTPScreen';
 
 
 export default function App() {
@@ -26,7 +27,10 @@ export default function App() {
         name="Login" 
         component={Login} 
         options={{ headerShown: false }}/>
-      
+      <Stack.Screen
+        name="OTPVerification" 
+        component={OTPVerification} 
+        options={{ headerShown: false }}/>
     </Stack.Navigator>
     </NavigationContainer>
 </>

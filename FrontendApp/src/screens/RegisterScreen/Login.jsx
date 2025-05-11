@@ -56,6 +56,7 @@ const PorterPartnerLogin = ({ navigation }) => {
             return;
         }
         console.log('Logging in with:', phoneNumber);
+        navigation.navigate("OTPVerification",{ phoneNumber })
     };
 
     return (
