@@ -1,20 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React,{useEffect} from 'react'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect } from 'react'
 
-const SplashScreen = ({navigation}) => {
+const SplashScreen = ({ navigation }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
-            // Navigate to the next screen after 3 seconds
             navigation.navigate('Login')
         }, 3000)
-
         return () => clearTimeout(timer)
     },)
-  return (
-    <View style={styles.container}>
-      <Text style={styles.appTitle}>ZAP</Text>
-    </View>
-  )
+    return (
+        <SafeAreaView style={styles.container}>
+            <Text style={styles.appTitle}>ZAP</Text>
+        </SafeAreaView>
+    )
 }
 
 export default SplashScreen
