@@ -11,7 +11,7 @@ import {
     Button,
     Pressable,
 } from 'react-native';
-import OTPScreen from './OTPScreen';
+
 
 
 const PorterPartnerLogin = ({ navigation }) => {
@@ -50,7 +50,7 @@ const PorterPartnerLogin = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="dark-content" backgroundColor="#f8f8f8" />
+         
             <View style={styles.content}>
                 <View style={styles.logoContainer}>
                     <Text style={styles.appTitle}>ZAP</Text>
@@ -86,10 +86,10 @@ const PorterPartnerLogin = ({ navigation }) => {
                         linkText1="TDS Declaration"
                     />
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate("OTPScreen")}
+                <TouchableOpacity
                     style={[styles.loginButton, isFormValid ? styles.loginButtonActive : {}]}
                     onPress={handleLogin}
-                    disabled={!isFormValid} onPress={() => navigation.navigate("OTPScreen")}
+                    disabled={!isFormValid}
                 >
                     <Text style={styles.loginButtonText}>LOGIN</Text>
 
