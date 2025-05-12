@@ -198,23 +198,7 @@ const styles = StyleSheet.create({
         color: '#3498db',
         textDecorationLine: 'underline',
     },
-    loginButton: {
-        width: '100%',
-        height: 50,
-        backgroundColor: '#ccc',
-        borderRadius: 25,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginVertical: 20,
-    },
-    loginButtonActive: {
-        backgroundColor: '#3498db',
-    },
-    loginButtonText: {
-        color: '#fff',
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
+  
     homeLink: {
         fontSize: 16,
         color: '#3498db',

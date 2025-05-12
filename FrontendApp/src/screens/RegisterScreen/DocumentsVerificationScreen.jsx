@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import ProfessionalDocumentsScreen from './ProfessionalDocumentsScreen';
+import CustomCard from '../../components/CardUpload';
 
 const DocumentsVerification = ({ navigation }) => {
     const [aadhaar, setAadhaar] = useState(null);
@@ -43,10 +44,8 @@ const DocumentsVerification = ({ navigation }) => {
     const isNextEnabled = aadhaar && pan && selfie;
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={styles.container}> 
 
-        
             <View style={styles.headerLine} />
             <Text style={styles.appTitle}>ZAP</Text>
 
@@ -55,45 +54,27 @@ const DocumentsVerification = ({ navigation }) => {
                 contentContainerStyle={{ flexGrow: 1 }}
                 keyboardShouldPersistTaps="handled"
             >
-                {/* Content Card */}
-                <View style={styles.card}>
-                    <Text style={styles.title}>Documents Verification</Text>
-
-                    {/* Aadhaar Section */}
-                    <View style={styles.section}>
-                        <Text style={styles.label}>Aadhaar Number</Text>
-                        <TextInput style={styles.input} placeholder="Enter Aadhaar Number" />
-                        <TouchableOpacity style={styles.uploadButton} onPress={() => handleUpload('aadhaar')}>
-                            <Text style={styles.buttonText}>
-                                {aadhaar ? '✅ Aadhaar Uploaded' : '📎 Upload Aadhaar'}
-                            </Text>
-                        </TouchableOpacity>
-                        {aadhaar && <Image source={{ uri: aadhaar }} style={styles.imagePreview} />}
-                    </View>
-
-                    {/* PAN Section */}
-                    <View style={styles.section}>
-                        <Text style={styles.label}>PAN Number</Text>
-                        <TextInput style={styles.input} placeholder="Enter PAN Number" />
-                        <TouchableOpacity style={styles.uploadButton} onPress={() => handleUpload('pan')}>
-                            <Text style={styles.buttonText}>
-                                {pan ? '✅ PAN Uploaded' : '📎 Upload PAN'}
-                            </Text>
-                        </TouchableOpacity>
-                        {pan && <Image source={{ uri: pan }} style={styles.imagePreview} />}
-                    </View>
-
-                    {/* Selfie Section */}
-                    <View style={styles.section}>
-                        <Text style={styles.label}>Selfie</Text>
-                        <TouchableOpacity style={styles.uploadButton} onPress={() => handleUpload('selfie')}>
-                            <Text style={styles.buttonText}>
-                                {selfie ? '✅ Selfie Uploaded' : '📸 Take Selfie'}
-                            </Text>
-                        </TouchableOpacity>
-                        {selfie && <Image source={{ uri: selfie }} style={styles.imagePreview} />}
-                    </View>
-                </View>
+             <CustomCard
+                type="aadhaar"
+                label="Aadhaar Number "
+                placeholder="Enter Aadhaar Number"
+                imageUri={aadhaar}  
+                onUpload={() => handleUpload('aadhaar')}
+            />
+            <CustomCard
+                type="pan"
+                label="PAN Number"
+                placeholder="Enter PAN Number"
+                imageUri={pan}
+                onUpload={() => handleUpload('pan')}
+            />
+            <CustomCard
+                type="selfie"
+                label="Selfie"
+                placeholder="Take Selfie"
+                imageUri={selfie}
+                onUpload={() => handleUpload('selfie')} 
+            />
             </ScrollView>
 
             {/* Next Button (Outside ScrollView) */}

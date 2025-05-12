@@ -73,16 +73,6 @@ const OTPVerificationScreen = ({ navigation, route }) => {
 
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>Enter OTP</Text>
-                {/* <TextInput
-            style={styles.otpInput}
-            value={otp}
-            onChangeText={setOtp}
-            keyboardType="number-pad"
-            maxLength={6}
-            autoFocus
-        
-            placeholderTextColor="#ccc"
-          /> */}
                 <OTPInput length={6} value={otp} onChange={setOtp} onComplete={handleComplete} />
             </View>
 
