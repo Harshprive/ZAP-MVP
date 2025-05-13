@@ -1,31 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View, Text, SafeAreaView, StyleSheet, ScrollView, TextInput,
-  TouchableOpacity, Alert, Image
+  TouchableOpacity, Alert, Image,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import ServiceDomainScreen from './ServiceDomainScreen';
+import CustomButton from '../../components/CustomButton';
 
-const ServiceDocumentsPreview = ({ navigation }) => {
-  const [experience, setExperience] = useState('');
-  const [projects, setProjects] = useState('');
-  const [domain, setDomain] = useState('');
-  const [longTerm, setLongTerm] = useState('');
-  const [shortTerm, setShortTerm] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedService, setSelectedService] = useState(null);
-  const [licenseImage, setLicenseImage] = useState(null);
+// Constants for service options
+const SERVICE_OPTIONS = [
+  'Small scale service',
+  'Mid scale service',
+  'Large scale service',
+];
 
-  // Function to handle selecting an image
-  const pickImage = async () => {
+// Reusable Input Component
+const FormInput = ({ placeholder, value, onChangeText, style, ...props }) => (
+  <TextInput
+    style={[styles.input, style]}
+    placeholder={placeholder}
+    value={value}
+    onChangeText={onChangeText}
+    {...props}
+  />
+);
+
+// Reusable Service Button Component
+const ServiceButton = React.memo(({ service, isSelected, onPress }) => (
+  <TouchableOpacity
+    style={[styles.serviceButton, isSelected && styles.selectedService]}
+    onPress={() => onPress(service)}
+    accessibilityLabel={`Select ${service}`}
+  >
+    <Text style={[styles.serviceButtonText, isSelected && styles.selectedServiceText]}>
+      {service}
+    </Text>
+  </TouchableOpacity>
+));
+
+// Main Component
+const ProfessionalDocuments = ({ navigation }) => {
+  // Single state object for form data
+  const [formData, setFormData] = useState({
+    experience: '',
+    projects: '',
+    domain: '',
+    longTerm: '',
+    shortTerm: '',
+    description: '',
+    selectedService: null,
+    licenseImage: null,
+  });
+
+  // Generic handler for form inputs
+  const handleInputChange = useCallback((key, value) => {
+    setFormData((prev) => ({ ...prev, [key]: value }));
+  }, []);
+
+  // Image picker handler
+  const pickImage = useCallback(async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
     if (status !== 'granted') {
-      Alert.alert('Permission Denied', 'You need to grant gallery permissions to upload an image.');
+      Alert.alert('Permission Denied', 'Gallery access is required to upload an image.');
       return;
     }
 
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
@@ -33,30 +72,35 @@ const ServiceDocumentsPreview = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setLicenseImage(result.assets[0].uri);
+      handleInputChange('licenseImage', result.assets[0].uri);
     }
-  };
+  }, [handleInputChange]);
 
-  const handleServiceSelection = (service) => {
-    setSelectedService(service);
-  };
+  // Service selection handler
+  const handleServiceSelection = useCallback((service) => {
+    handleInputChange('selectedService', service);
+  }, [handleInputChange]);
 
-  const handleConfirmation = () => {
-    Alert.alert("Confirmation", "Your details have been confirmed!");
-  };
+  // Confirmation handler with basic validation
+  const handleConfirmation = useCallback(() => {
+    const { experience, projects, domain, longTerm, shortTerm, description, selectedService } = formData;
+    if (!experience || !projects || !domain || !longTerm || !shortTerm || !description || !selectedService) {
+      Alert.alert('Incomplete Form', 'Please fill all required fields.');
+      return;
+    }
+    navigation.navigate('ServiceDomainSelection')
+  }, [formData]);
 
-  const isNextEnabled =
-    experience && projects && domain && longTerm && shortTerm && description && selectedService;
+  // Check if "Next" button should be enabled
+  const isNextEnabled = Object.values(formData).every((value) => value !== '' && value !== null);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerLine} />
-      <Text style={styles.appTitle}>ZAP</Text>
-
+      <View style={{marginTop: 20}}>
+      <Text style={styles.appTitle}>Professional Documents</Text>
+      </View>
       <ScrollView style={styles.scrollView}>
         <View style={styles.card}>
-          <Text style={styles.title}>Professional Documents</Text>
-
           {/* License Upload */}
           <View style={styles.licenseRow}>
             <Text style={styles.label}>Legal License</Text>
@@ -64,109 +108,108 @@ const ServiceDocumentsPreview = ({ navigation }) => {
               <Text style={styles.uploadButtonText}>Upload License</Text>
             </TouchableOpacity>
           </View>
+          {formData.licenseImage && (
+            <Image source={{ uri: formData.licenseImage }} style={styles.licenseImage} />
+          )}
 
-          {/* Display uploaded image */}
-          {licenseImage && <Image source={{ uri: licenseImage }} style={styles.licenseImage} />}
-
-          {/* Experience Input */}
+          {/* Experience and Projects */}
           <View style={styles.experienceBox}>
             <View style={styles.experienceRow}>
               <Text style={styles.experienceLabel}>Total Experience</Text>
-              <TextInput
-                style={styles.inputSmall}
+              <FormInput
                 placeholder="Years"
                 keyboardType="numeric"
-                value={experience}
-                onChangeText={setExperience}
+                value={formData.experience}
+                onChangeText={(value) => handleInputChange('experience', value)}
+                style={styles.inputSmall}
               />
             </View>
             <View style={styles.experienceRow}>
               <Text style={styles.experienceLabel}>Total Projects</Text>
-              <TextInput
-                style={styles.inputSmall}
+              <FormInput
                 placeholder="Projects"
                 keyboardType="numeric"
-                value={projects}
-                onChangeText={setProjects}
+                value={formData.projects}
+                onChangeText={(value) => handleInputChange('projects', value)}
+                style={styles.inputSmall}
               />
             </View>
           </View>
 
           {/* Form Fields */}
-          <TextInput
-            style={styles.input}
+          <FormInput
             placeholder="Domain Name"
-            value={domain}
-            onChangeText={setDomain}
+            value={formData.domain}
+            onChangeText={(value) => handleInputChange('domain', value)}
           />
           <View style={styles.termRow}>
-            <TextInput
-              style={[styles.input, styles.halfInput]}
+            <FormInput
               placeholder="Long Term"
-              value={longTerm}
-              onChangeText={setLongTerm}
+              value={formData.longTerm}
+              onChangeText={(value) => handleInputChange('longTerm', value)}
+              style={styles.halfInput}
             />
-            <TextInput
-              style={[styles.input, styles.halfInput]}
+            <FormInput
               placeholder="Short Term"
-              value={shortTerm}
-              onChangeText={setShortTerm}
+              value={formData.shortTerm}
+              onChangeText={(value) => handleInputChange('shortTerm', value)}
+              style={styles.halfInput}
             />
           </View>
-          <TextInput
-            style={[styles.input, styles.textArea]}
+          <FormInput
             placeholder="Experience Description"
             multiline
             numberOfLines={4}
-            value={description}
-            onChangeText={setDescription}
+            value={formData.description}
+            onChangeText={(value) => handleInputChange('description', value)}
+            style={styles.textArea}
           />
 
           {/* Confirmation Button */}
-          <TouchableOpacity style={styles.confirmButton} onPress={handleConfirmation}>
+          {/* <TouchableOpacity
+            style={styles.confirmButton}
+            onPress={handleConfirmation}
+            accessibilityLabel="Confirm details"
+          >
             <Text style={styles.confirmButtonText}>I am sure!</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           {/* Service Level Selection */}
           <Text style={styles.sectionTitle}>Service Level</Text>
           <View style={styles.serviceRow}>
-            {["Small scale service", "Mid scale service", "Large scale service"].map((service) => (
-              <TouchableOpacity
+            {SERVICE_OPTIONS.map((service) => (
+              <ServiceButton
                 key={service}
-                style={[
-                  styles.serviceButton,
-                  selectedService === service && styles.selectedService,
-                ]}
-                onPress={() => handleServiceSelection(service)}
-              >
-                <Text
-                  style={[
-                    styles.serviceButtonText,
-                    selectedService === service && styles.selectedServiceText,
-                  ]}
-                >
-                  {service}
-                </Text>
-              </TouchableOpacity>
+                service={service}
+                isSelected={formData.selectedService === service}
+                onPress={handleServiceSelection}
+              />
             ))}
           </View>
-
-          {/* Next Button */}
-          <TouchableOpacity onPress={() => navigation.navigate("ServiceDomainScreen")}
-            style={[styles.nextButton, isNextEnabled && styles.nextButtonEnabled]}>
-            <Text style={[styles.nextButtonText, isNextEnabled && styles.nextButtonTextEnabled]}>
-              Next
-            </Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
+      <CustomButton
+        title={'Go to next screen'}
+        onPress={handleConfirmation}
+        isActive={isNextEnabled}
+        
+      />
+      {/* <TouchableOpacity
+        onPress={() => navigation.navigate('ServiceDomainScreen')}
+        style={[styles.nextButton, isNextEnabled && styles.nextButtonEnabled]}
+        accessibilityLabel="Go to next screen"
+      >
+        <Text style={[styles.nextButtonText, isNextEnabled && styles.nextButtonTextEnabled]}>
+          Next
+        </Text>
+      </TouchableOpacity> */}
     </SafeAreaView>
   );
 };
 
+// Styles (unchanged for brevity, but consider extracting to a separate file)
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
-  headerLine: { height: 3, backgroundColor: '#6200ee', width: '30%', marginTop: 10 },
+  container: { flex: 1, backgroundColor: '#FFFFFF' ,padding: 5},
   appTitle: { fontSize: 24, color: '#6200ee', textAlign: 'center', marginVertical: 10, fontWeight: 'bold' },
   scrollView: { flex: 1 },
   card: {
@@ -180,18 +223,15 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  title: { fontSize: 20, fontWeight: 'bold', marginBottom: 20 },
   licenseRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 },
   label: { fontSize: 16 },
   uploadButton: { backgroundColor: '#6200ee', paddingVertical: 8, paddingHorizontal: 12, borderRadius: 4 },
   uploadButtonText: { color: '#FFFFFF', fontSize: 12 },
-  licenseImage: { width: '100%', height: 200, borderRadius: 8, marginTop: 10 },
+  licenseImage: { width: '100%', height: 200, borderRadius: 8, marginVertical: 10 },
   experienceBox: { backgroundColor: '#E8F0FE', padding: 16, borderRadius: 8, marginBottom: 20 },
   experienceRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
   experienceLabel: { color: '#333333' },
-  inputSmall: {
-    borderWidth: 1, borderColor: '#DDDDDD', borderRadius: 4, padding: 8, width: 80, textAlign: 'center',
-  },
+  inputSmall: { borderWidth: 1, borderColor: '#DDDDDD', borderRadius: 4, padding: 8, width: 80, textAlign: 'center' },
   input: { borderWidth: 1, borderColor: '#DDDDDD', borderRadius: 4, padding: 12, marginBottom: 12 },
   termRow: { flexDirection: 'row', justifyContent: 'space-between' },
   halfInput: { width: '48%' },
@@ -202,6 +242,7 @@ const styles = StyleSheet.create({
   serviceRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 20 },
   serviceButton: { borderWidth: 1, borderColor: '#DDDDDD', borderRadius: 16, paddingVertical: 6, paddingHorizontal: 12 },
   selectedService: { backgroundColor: '#6200ee', borderColor: '#6200ee' },
+  serviceButtonText: { color: '#000' },
   selectedServiceText: { color: '#FFFFFF' },
   nextButton: { backgroundColor: '#F5F5F5', padding: 16, borderRadius: 4, alignItems: 'center' },
   nextButtonEnabled: { backgroundColor: '#6200ee' },
@@ -209,4 +250,4 @@ const styles = StyleSheet.create({
   nextButtonTextEnabled: { color: '#FFFFFF' },
 });
 
-export default ServiceDocumentsPreview;
+export default ProfessionalDocuments;

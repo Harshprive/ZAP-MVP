@@ -12,8 +12,8 @@ import {
     ScrollView,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import ProfessionalDocumentsScreen from './ProfessionalDocumentsScreen';
 import CustomCard from '../../components/CardUpload';
+import CustomButton from '../../components/CustomButton';
 
 const DocumentsVerification = ({ navigation }) => {
     const [aadhaar, setAadhaar] = useState(null);
@@ -44,49 +44,45 @@ const DocumentsVerification = ({ navigation }) => {
     const isNextEnabled = aadhaar && pan && selfie;
 
     return (
-        <SafeAreaView style={styles.container}> 
-
-            <View style={styles.headerLine} />
-            <Text style={styles.appTitle}>ZAP</Text>
-
+        <SafeAreaView style={styles.container}>
+<View style={styles.headerView} >
+            {/* <View style={styles.headerLine} /> */}
+            <Text style={styles.appTitle}>Document Verification</Text>
+</View>
             <ScrollView
                 style={styles.scrollContainer}
-                contentContainerStyle={{ flexGrow: 1 }}
+                // contentContainerStyle={{ flexGrow: 1 }}
                 keyboardShouldPersistTaps="handled"
+                showsVerticalScrollIndicator={false}
             >
-             <CustomCard
-                type="aadhaar"
-                label="Aadhaar Number "
-                placeholder="Enter Aadhaar Number"
-                imageUri={aadhaar}  
-                onUpload={() => handleUpload('aadhaar')}
-            />
-            <CustomCard
-                type="pan"
-                label="PAN Number"
-                placeholder="Enter PAN Number"
-                imageUri={pan}
-                onUpload={() => handleUpload('pan')}
-            />
-            <CustomCard
-                type="selfie"
-                label="Selfie"
-                placeholder="Take Selfie"
-                imageUri={selfie}
-                onUpload={() => handleUpload('selfie')} 
-            />
+                <CustomCard
+                    type="aadhaar"
+                    label="Aadhaar Number "
+                    placeholder="Enter Aadhaar Number"
+                    imageUri={aadhaar}
+                    onUpload={() => handleUpload('aadhaar')}
+                />
+                <CustomCard
+                    type="pan"
+                    label="PAN Number"
+                    placeholder="Enter PAN Number"
+                    imageUri={pan}
+                    onUpload={() => handleUpload('pan')}
+                />
+                <CustomCard
+                    type="selfie"
+                    label="Selfie"
+                    placeholder="Take Selfie"
+                    imageUri={selfie}
+                    onUpload={() => handleUpload('selfie')}
+                />
             </ScrollView>
 
             {/* Next Button (Outside ScrollView) */}
-            <TouchableOpacity
-                onPress={() => navigation.navigate("ProfessionalDocumentsScreen")}
-                style={[styles.nextButton, isNextEnabled && styles.nextButtonEnabled]}
-                disabled={!isNextEnabled}
-            >
-                <Text style={[styles.nextButtonText, isNextEnabled && styles.nextButtonTextEnabled]}>
-                    Next
-                </Text>
-            </TouchableOpacity>
+            <CustomButton
+                title={'Next'}
+                onPress={() => navigation.navigate("ProfessionalDocuments")}
+                isActive={isNextEnabled} />
         </SafeAreaView>
     );
 };
@@ -95,48 +91,28 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
+        // padding: 16
     },
-    statusBar: {
-        height: 44,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 16,
-        backgroundColor: '#FFFFFF',
-    },
-    statusBarText: {
-        fontSize: 12,
-    },
-    statusBarIcons: {
-        flexDirection: 'row',
-        gap: 4,
-    },
-    headerLine: {
-        height: 3,
-        backgroundColor: '#6200ee',
-        width: '30%',
+
+    headerView: {
+       
+      marginTop: 20,
+        // height: 3,
+        // backgroundColor: '#6200ee',
+        // width: '30%',
     },
     scrollContainer: {
         flex: 1,
-    }, appTitle: { fontSize: 24, color: '#6200ee', textAlign: 'center', marginVertical: 10, fontWeight: 'bold' },
-
-    card: {
-        margin: 16,
-        padding: 16,
-        backgroundColor: '#FFFFFF',
-        borderRadius: 8,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
     },
+     appTitle: { fontSize: 24,
+         color: '#6200ee',
+          textAlign: 'center',
+           marginVertical: 10,
+            fontWeight: 'bold' },
+
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 24,
-    },
-    section: {
         marginBottom: 24,
     },
     label: {
@@ -144,29 +120,14 @@ const styles = StyleSheet.create({
         color: '#333333',
         marginBottom: 8,
     },
-    input: {
-        borderWidth: 1,
-        borderColor: '#DDDDDD',
-        borderRadius: 4,
-        padding: 12,
-        marginBottom: 8,
-    },
-    uploadButton: {
-        backgroundColor: '#6200ee',
-        padding: 12,
-        borderRadius: 4,
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: '#FFFFFF',
-        fontWeight: '500',
-    },
+
     nextButton: {
         backgroundColor: '#F0F0F0',
         padding: 16,
         borderRadius: 4,
         alignItems: 'center',
         margin: 16,
+        // marginTop:10
     },
     nextButtonEnabled: {
         backgroundColor: '#6200ee',

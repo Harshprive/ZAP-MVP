@@ -29,7 +29,7 @@ const CustomButton = ({
 const styles = StyleSheet.create({
 
     buttonActive: {
-        backgroundColor: '#007AFF',
+        backgroundColor: '#6200ee',
     },
     buttonDisabled: {
         backgroundColor: '#ccc',
