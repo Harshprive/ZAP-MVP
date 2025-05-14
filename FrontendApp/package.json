@@ -28,7 +28,7 @@
     "react-native-qrcode-svg": "^6.3.15",
     "@react-native-community/datetimepicker": "8.2.0"
 }
-  },
+  ,
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
